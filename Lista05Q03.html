@@ -1,0 +1,46 @@
+<!--
+
+Desenvolva um programa que faça o sorteio de 20 números entre 0 e 10 e mostre na tela: a) Quais foram os números sorteados
+b) Quantos números estão acima de 5
+c) Quantos números são divisíveis por 3
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h3>Sorteio de NúmeorsDescubra os números primos do intervalo</h3>
+    <form action="">
+        <button type="button" id="btSortear" onclick="sortear()" value="Sortear Números"></button>
+        <label for="idSorteados">Números Sorteados:</label>
+        <br>
+        <output id="idSorteados"></output>
+        <label for="idMaiores"></label>
+        <output for="idMaiores"></output>
+        <label for="idDivisiveis"></label>
+        <output for="idDivisiveis"></output>
+    </form>
+
+    
+<script>
+    function sortear(){
+        var numero=0;
+        var stringNumeros='';
+        
+        for(var i=0; i<20; i++){
+            numero= Math.round()* (10 - 0) + 0;
+
+            stringNumeros = numero + ' ';
+        }
+
+        document.getElementById("idSorteados").value = stringNumeros;
+    }
+</script>
+</body>
+</html>
