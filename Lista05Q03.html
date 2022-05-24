@@ -17,29 +17,45 @@ c) Quantos números são divisíveis por 3
 <body>
     <h3>Sorteio de NúmeorsDescubra os números primos do intervalo</h3>
     <form action="">
-        <button type="button" id="btSortear" onclick="sortear()" value="Sortear Números"></button>
-        <label for="idSorteados">Números Sorteados:</label>
+        <button type="button" id="btSortear" onclick="sortear()" value="Sortear Números">Sortear Números</button>
+        <br><br>
+        <label for="idSorteados"><b>Números Sorteados:</b></label>
         <br>
         <output id="idSorteados"></output>
-        <label for="idMaiores"></label>
-        <output for="idMaiores"></output>
-        <label for="idDivisiveis"></label>
-        <output for="idDivisiveis"></output>
+        <br>
+        <label for="idMaiores"><b>Sorteados Maiores que Cinco</b></label>
+        <br>
+        <output id="idMaiores"></output>
+        <br>
+        <label for="idDivisiveis"><b>Sorteados Divísiveis por Três</b></label>
+        <br>
+        <output id="idDivisiveis"></output>
     </form>
 
     
 <script>
     function sortear(){
         var numero=0;
+        var contaCinco = 0;
+        var contaDivisivel = 0;
         var stringNumeros='';
         
         for(var i=0; i<20; i++){
-            numero= Math.round()* (10 - 0) + 0;
+            numero= Math.floor(Math.random()* (10 - 0) + 0);
+            stringNumeros += numero + ' ';
 
-            stringNumeros = numero + ' ';
+            if(numero >5){
+                contaCinco++;
+            }
+
+            if((numero % 3 == 0)&&(numero!=0)){
+                contaDivisivel++;
+            }
         }
-
+           
         document.getElementById("idSorteados").value = stringNumeros;
+        document.getElementById("idMaiores").value = contaCinco;
+        document.getElementById("idDivisiveis").value = contaDivisivel;
     }
 </script>
 </body>
