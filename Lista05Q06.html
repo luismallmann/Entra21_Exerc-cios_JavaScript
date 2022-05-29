@@ -1,0 +1,99 @@
+<!--
+Crie um algoritmo que leia a idade de 'n' pessoas, mostrando no final:
+a) Qual é a média de idade do grupo
+b) Quantas pessoas tem mais de 18 anos
+c) Quantas pessoas tem menos de 5 anos
+d) Qual foi a maior idade lida-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <form action="">
+        <label for="idIdade">Informe a idade:</label>
+        <br>
+        <input type="number" name="nmIdade" id="idIdade">
+        <br>
+        <br>
+        <button type="button" onclick="calcular()">Informar</button>
+        <button type="button" onclick="mostrar()">Mostrar Resultados</button>
+        <br>
+        <label for="idMedia"><b>Média:</b></label>
+        <output id="idMedia"></output>
+        <br>
+        <label for="idMaisDezoito"><b>Maior que 18:</b></label>
+        <output id="idMaisDezoito"></output>
+        <br>
+        <label for="idMenorCinco"><b>Menor que 5:</b></label>
+        <output id="idMenorCinco"></output>
+        <br>
+        <label for="idMaior"><b>Maior:</b></label>
+        <output id="idMaior"></output>
+    </form>
+    
+<script>
+    var idadeInformada, maior=0;
+    var primeiroLido = false;
+    var soma=0;
+    var maisDezoito = 0;
+    var menorCinco = 0;
+    var cont=0;
+    function calcular(){        
+        idadeInformada = Number(document.getElementById("idIdade").value);
+
+        alert('Capturado');
+
+        if(primeiroLido == false){//primeira idade lido
+            maior = idadeInformada;
+
+            soma+=idadeInformada;
+
+            cont++;
+
+            if(idadeInformada < 5){
+                menorCinco++;
+            }
+            else if(idadeInformada > 18){
+                maisDezoito++;
+            }
+        }else{//demais idades lidas
+
+            soma+=idadeInformada;
+
+            if(idadeInformada > maior){
+                maior = idadeInformada;
+            }
+
+            if(idadeInformada < 5){
+                menorCinco++;
+            }
+            else if(idadeInformada > 18){
+                maisDezoito++;
+            }
+
+            cont++;
+        }
+
+    };
+
+    function mostrar(){
+        let media;
+
+        media = soma/cont;
+
+        document.getElementById("idMedia").value=media.toFixed(2);
+        document.getElementById("idMaisDezoito").value=maisDezoito;
+        document.getElementById("idMenorCinco").value=menorCinco;
+        document.getElementById("idMaior").value=maior;
+       
+    };
+ 
+</script>
+</body>
+</html>

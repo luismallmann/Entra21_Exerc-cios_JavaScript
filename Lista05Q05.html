@@ -12,10 +12,49 @@ Crie um aplicativo que leia o preço de 'n' produtos. No final, mostre na tela q
     <script src='main.js'></script>
 </head>
 <body>
-
-
+    <form action="">
+        <label for="idNumero">Informe o preço:</label>
+        <br>
+        <input type="number" name="nmNumero" id="idNumero">
+        <br>
+        <br>
+        <button type="button" onclick="calcular()">Informar</button>
+        <button type="button" onclick="mostrar()">Mostrar Resultados</button>
+        <br>
+        <label for="idMaior"><b>Maior:</b></label>
+        <output id="idMaior"></output>
+        <br>
+        <label for="idMenor"><b>Menor:</b></label>
+        <output id="idMenor"></output>
+    </form>
     
 <script>
+    var numeroInformado, maior=0, menor=0;
+    var primeiroLido = false;
+
+    function calcular(){
+        
+        numeroInformado = Number(document.getElementById("idNumero").value);
+        
+        alert('Capturado');
+
+        if(primeiroLido == false){
+            maior = numeroInformado;
+            menor = numeroInformado;
+            primeiroLido = true;
+        }else{
+            if(numeroInformado < menor){
+                menor = numeroInformado;
+            }else if(numeroInformado > maior){
+                maior = numeroInformado;
+            }
+        }
+    };
+
+    function mostrar(){
+        document.getElementById("idMaior").value=maior;
+        document.getElementById("idMenor").value=menor;
+    };
  
 </script>
 </body>
