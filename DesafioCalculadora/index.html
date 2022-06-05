@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calculadora</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+        }
+        input{
+            width: 90%;   
+            height: 50px;
+            background-color: gray;
+            font-size: large;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: white;
+            border-radius: 10px;
+        }
+        output{
+            background-color: darkgray;
+            height: 100px;
+            line-height: 100px;
+            padding-right: 5px;
+            width: 95%;
+            display: flex;
+            justify-content: right;
+            vertical-align: middle;
+            font-size: 60px;
+        }
+        #calculadora{
+            align-items: center;
+            flex-direction: row;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            width: 100%;
+            min-width: 400px;
+            max-width: 500px;
+            border: 1px solid black;
+            border-radius: 15px;
+            background-color: black;
+            margin: 0 auto;
+        }
+        #linha{
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            justify-content: center;
+            
+        }
+        #coluna{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 30%;
+            display: flex;
+            justify-content: center;
+        }        
+    </style>
+</head>
+<body>
+    <div id="calculadora">
+        <div id="linha">
+                <output name="nmResultado" id="idResultado" value="">Resultado</output>
+        </div>  
+        <div id="linha">
+            <div id="coluna">
+                <input type="button" id="idSete" name="nmSete" value="7">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idOito" name="nmOito" value="8">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idNove" name="nmNove" value="9">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idDivisao" name="nmDivisao" value="/" style="background-color: yellow; color: black;">
+            </div>
+        </div>  
+        <div id="linha">
+            <div id="coluna">
+                <input type="button" id="idQuatro" name="nmQuatro" value="4">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idCinco" name="nmCinco" value="5">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idSeis" name="nmSeis" value="6">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idMultiplicar" name="nmMultiplicar" value="x" style="background-color: yellow; color: black;">
+            </div>
+        </div>  
+        <div id="linha">
+            <div id="coluna">
+                <input type="button" id="idUm" name="nmUm" value="1">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idDois" name="nmDois" value="2">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idTres" name="nmTres" value="3">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idSubtrair" name="nmSubtrair" value="-" style="background-color: yellow; color: black;">
+            </div>
+        </div>
+        <div id="linha">
+            <div id="coluna">
+                <input type="button" id="idZero" name="nmZero" value="0">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idPonto" name="nmPonto" value=".">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idCalcular" name="nmCalcular" value="Calcular" style="background-color: green; color: black;">
+            </div>
+            <div id="coluna">
+                <input type="button" id="idAdicao" name="nmAdicao" value="+" style="background-color: yellow; color: black;">
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        var 
+    </script>
+</body>
+</html>
