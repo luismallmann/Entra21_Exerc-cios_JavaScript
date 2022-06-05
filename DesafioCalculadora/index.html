@@ -69,15 +69,19 @@
         <div id="linha">
                 <output name="nmResultado" id="idResultado" value="">Resultado</output>
         </div>  
+        <div id="linha"  style="display: flex; justify-content: right; padding-top: 5px;
+        padding-bottom: 5px;">
+            <input type="button" id="idLimpar" name="nmLimpar" value="LIMPAR" style="width: 120px; background-color: orangered;">
+        </div>
         <div id="linha">
             <div id="coluna">
-                <input type="button" id="idSete" name="nmSete" value="7">
+                <input type="button" id="idSete" name="nmSete" value="7" onclick="informarDados('7');">
             </div>
             <div id="coluna">
-                <input type="button" id="idOito" name="nmOito" value="8">
+                <input type="button" id="idOito" name="nmOito" value="8" onclick="informarDados('8');">
             </div>
             <div id="coluna">
-                <input type="button" id="idNove" name="nmNove" value="9">
+                <input type="button" id="idNove" name="nmNove" value="9" onclick="informarDados('9');">
             </div>
             <div id="coluna">
                 <input type="button" id="idDivisao" name="nmDivisao" value="/" style="background-color: yellow; color: black;">
@@ -85,13 +89,13 @@
         </div>  
         <div id="linha">
             <div id="coluna">
-                <input type="button" id="idQuatro" name="nmQuatro" value="4">
+                <input type="button" id="idQuatro" name="nmQuatro" value="4" onclick="informarDados('4');">
             </div>
             <div id="coluna">
-                <input type="button" id="idCinco" name="nmCinco" value="5">
+                <input type="button" id="idCinco" name="nmCinco" value="5" onclick="informarDados('5');">
             </div>
             <div id="coluna">
-                <input type="button" id="idSeis" name="nmSeis" value="6">
+                <input type="button" id="idSeis" name="nmSeis" value="6" onclick="informarDados('6');">
             </div>
             <div id="coluna">
                 <input type="button" id="idMultiplicar" name="nmMultiplicar" value="x" style="background-color: yellow; color: black;">
@@ -99,13 +103,13 @@
         </div>  
         <div id="linha">
             <div id="coluna">
-                <input type="button" id="idUm" name="nmUm" value="1">
+                <input type="button" id="idUm" name="nmUm" value="1" onclick="informarDados('1');">
             </div>
             <div id="coluna">
-                <input type="button" id="idDois" name="nmDois" value="2">
+                <input type="button" id="idDois" name="nmDois" value="2" onclick="informarDados('2');">
             </div>
             <div id="coluna">
-                <input type="button" id="idTres" name="nmTres" value="3">
+                <input type="button" id="idTres" name="nmTres" value="3" onclick="informarDados('3');">
             </div>
             <div id="coluna">
                 <input type="button" id="idSubtrair" name="nmSubtrair" value="-" style="background-color: yellow; color: black;">
@@ -113,10 +117,10 @@
         </div>
         <div id="linha">
             <div id="coluna">
-                <input type="button" id="idZero" name="nmZero" value="0">
+                <input type="button" id="idZero" name="nmZero" value="0" onclick="informarDados('0');">
             </div>
             <div id="coluna">
-                <input type="button" id="idPonto" name="nmPonto" value=".">
+                <input type="button" id="idPonto" name="nmPonto" value="." onclick="informarDados('.');">
             </div>
             <div id="coluna">
                 <input type="button" id="idCalcular" name="nmCalcular" value="Calcular" style="background-color: green; color: black;">
@@ -129,7 +133,30 @@
     </div>
 
     <script>
-        var 
+        var numeroTela="";
+        var sequencia1 = sequencia2 = resultado = 0;
+        function informarDados(botao){
+            numeroTela+=botao;
+            document.getElementById("idResultado").value = numeroTela;
+        }
+
+        
+        switch(infor)
+
+        function adicao(){
+            resultado = sequencia1 + sequencia2;
+        }
+        function subtracao(){
+            resultado = sequencia1 - sequencia2;
+        }
+        function multiplicacao(){
+            resultado = sequencia1 * sequencia2;
+        }
+        function divisao(){
+            resultado = sequencia1 / sequencia2;
+        }
+
+        
     </script>
 </body>
 </html>
