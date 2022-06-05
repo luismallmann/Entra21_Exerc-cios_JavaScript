@@ -67,11 +67,14 @@
 <body>
     <div id="calculadora">
         <div id="linha">
-                <output name="nmResultado" id="idResultado" value="">Resultado</output>
+            <output name="nmOperacao" id="idOperacao" value="" style="height: 80px; font-size: small; vertical-align: middle;"></output>
+        </div>  
+        <div id="linha">
+                <output name="nmResultado" id="idResultado" value="">_</output>
         </div>  
         <div id="linha"  style="display: flex; justify-content: right; padding-top: 5px;
         padding-bottom: 5px;">
-            <input type="button" id="idLimpar" name="nmLimpar" value="LIMPAR" style="width: 120px; background-color: orangered;">
+            <input type="button" id="idLimpar" name="nmLimpar" value="LIMPAR" onclick="limpar()"; style="width: 120px; background-color: orangered;">
         </div>
         <div id="linha">
             <div id="coluna">
@@ -84,7 +87,7 @@
                 <input type="button" id="idNove" name="nmNove" value="9" onclick="informarDados('9');">
             </div>
             <div id="coluna">
-                <input type="button" id="idDivisao" name="nmDivisao" value="/" style="background-color: yellow; color: black;">
+                <input type="button" id="idDivisao" name="nmDivisao" value="/" onclick="informarDados('/');" style="background-color: yellow; color: black;">
             </div>
         </div>  
         <div id="linha">
@@ -98,7 +101,7 @@
                 <input type="button" id="idSeis" name="nmSeis" value="6" onclick="informarDados('6');">
             </div>
             <div id="coluna">
-                <input type="button" id="idMultiplicar" name="nmMultiplicar" value="x" style="background-color: yellow; color: black;">
+                <input type="button" id="idMultiplicar" name="nmMultiplicar" value="x"  onclick="informarDados('*');" style="background-color: yellow; color: black;">
             </div>
         </div>  
         <div id="linha">
@@ -112,7 +115,7 @@
                 <input type="button" id="idTres" name="nmTres" value="3" onclick="informarDados('3');">
             </div>
             <div id="coluna">
-                <input type="button" id="idSubtrair" name="nmSubtrair" value="-" style="background-color: yellow; color: black;">
+                <input type="button" id="idSubtrair" name="nmSubtrair" value="-" onclick="informarDados('-');" style="background-color: yellow; color: black;">
             </div>
         </div>
         <div id="linha">
@@ -123,37 +126,97 @@
                 <input type="button" id="idPonto" name="nmPonto" value="." onclick="informarDados('.');">
             </div>
             <div id="coluna">
-                <input type="button" id="idCalcular" name="nmCalcular" value="Calcular" style="background-color: green; color: black;">
+                <input type="button" id="idCalcular" name="nmCalcular" value="Calcular" onclick="informarDados('=');" style="background-color: green; color: black;">
             </div>
             <div id="coluna">
-                <input type="button" id="idAdicao" name="nmAdicao" value="+" style="background-color: yellow; color: black;">
+                <input type="button" id="idAdicao" name="nmAdicao" value="+" onclick="informarDados('+');" style="background-color: yellow; color: black;">
             </div>
             
         </div>
     </div>
 
     <script>
-        var numeroTela="";
-        var sequencia1 = sequencia2 = resultado = 0;
+        var capturaTela="";
+        var operacao="";
+        var numeroAnterior = numeroAtual = resultadoOperacao = "";
         function informarDados(botao){
-            numeroTela+=botao;
-            document.getElementById("idResultado").value = numeroTela;
-        }
 
-        
-        switch(infor)
+            if((botao == '+') ||  (botao == '-') || (botao == '/') || (botao == '*')){
+            
+                if(operacao == ""){
+                    operacao = botao;
+                    numeroAtual = Number(capturaTela);
+                    capturaTela = "";
+                    document.getElementById("idResultado").value = capturaTela;
+                }
+                else{
+                    operacao = botao;
+                    numeroAnterior = numeroAtual;
+                    numeroAtual = Number(capturaTela);
+                    console.log(numeroAnterior+'/'+numeroAtual);
+                   
+                    switch(operacao){
+                        case '+':{
+                            soma(numeroAnterior,numeroAtual);break;
+                            document.getElementById("idResultado").value = numeroAtual;
+                            numeroAnterior = numeroAtual;
+                        }
 
-        function adicao(){
-            resultado = sequencia1 + sequencia2;
+                        case '-':subtracao(numeroAnterior, numeroAtual);break;
+                        case '*':multiplicacao(numeroAnterior, numeroAtual); break;
+                        case '/':divisao(numeroAnterior, numeroAtual);break;
+                        default: aler('Opção Inválida');
+                    }
+                    
+                }
+            }
+            else if(botao == "="){
+                numeroAnterior = numeroAtual;
+                numeroAtual = Number(capturaTela);
+                capturaTela = "";
+
+                switch(operacao){
+                    case '+':soma(numeroAnterior,numeroAtual);break;
+                    case '-':subtracao(numeroAnterior, numeroAtual);break;
+                    case '*':multiplicacao(numeroAnterior, numeroAtual); break;
+                    case '/':divisao(numeroAnterior, numeroAtual);break;
+                    default: alert('Opção Inválida');
+                }
+            }
+            else{
+                if(operacao != "")
+                    capturaTela = "";
+
+                capturaTela+=botao;
+                document.getElementById("idResultado").value = capturaTela;
+            }
         }
-        function subtracao(){
-            resultado = sequencia1 - sequencia2;
+        function soma(numero1, numero2){
+            resultadoOperacao = numero1 + numero2;
+            document.getElementById("idResultado").value = resultadoOperacao;
+            document.getElementById("idOperacao").value = ""+ numero1 + " + " + numero2;
+            numeroAtual = resultadoOperacao;
         }
-        function multiplicacao(){
-            resultado = sequencia1 * sequencia2;
+        function subtracao(numero1, numero2){
+            resultadoOperacao = numero1 - numero2;
+            document.getElementById("idResultado").value = resultadoOperacao;
+            document.getElementById("idOperacao").value = ""+ numero1 + " - " + numero2;
+            numeroAtual = resultadoOperacao;
         }
-        function divisao(){
-            resultado = sequencia1 / sequencia2;
+        function multiplicacao(numero1, numero2){
+            resultadoOperacao = numero1 * numero2;
+            document.getElementById("idResultado").value = resultadoOperacao;
+            document.getElementById("idOperacao").value = ""+ numero1 + " * " + numero2;
+            numeroAtual = resultadoOperacao;
+        }
+        function divisao(numero1, numero2){
+            resultadoOperacao = numero1 / numero2;
+            document.getElementById("idOperacao").value = ""+ numero1 + " / " + numero2;
+            document.getElementById("idResultado").value = resultadoOperacao;
+            numeroAtual = resultadoOperacao;
+        }
+        function limpar(){
+            numeroAnterior = numeroAtual = operacao = "";
         }
 
         
