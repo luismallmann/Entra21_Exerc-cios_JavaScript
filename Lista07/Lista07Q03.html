@@ -1,0 +1,85 @@
+<!--
+    3. Faça um algoritmo que leia o nome, o sexo e o salário de 5 funcionários e guarde esses dados em três vetores. 
+    No final, mostre uma listagem contendo apenas os dados das funcionárias mulheres que ganham mais de R$5 mil.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <output id="idContagem" name="nmContagem"></output>
+        <br>
+        <input type="text" id="idNome" name="nmNome" placeholder="Nome">
+        <br>
+        <input type="radio" id="idMasculino" name="nmSexo" value="m" checked>
+        <label for="idMasculino">Masculino</label>
+        <input type="radio" id="idFeminino" name="nmSexo" value="f">
+        <label for="idFeminino">Feminino</label>
+        <br>
+        <input type="number" id="idSalario" name="nmSalario" placeholder="Salario" min="0">
+        <input type="button" id="idSalvar" name="nmSalvar" onclick="salvarDados();" value="Enviar"></button>
+        <br><br>
+    </form>
+    <button id="idMostrar" name="nmMostrar" onclick="mostrar();">Mostrar</button>
+    <br><br>
+    <output id="idListagem"></output>
+</body>
+</html>
+
+<script>
+    var cont=1;
+    var nomeLido, salarioLido, sexoLido;
+    var nome=[];
+    var salario=[];
+    var sexo=[];
+
+    //contagem de nomes e idades já informados
+    document.getElementById("idContagem").value = "Cadastro 1 de 5"
+    
+    //desabilita o botão mostrar
+    document.getElementById("idMostrar").disabled=true;
+
+      //funcao que salva os dados no array
+      function salvarDados(){
+        if(cont <= 5){;
+            document.getElementById("idContagem").value = "Cadastro "+cont +" de 5";
+
+            nomeLido = document.getElementById("idNome").value;
+            salarioLido = document.getElementById("idSalario").value;
+
+            //testa se é masculino ou feminino
+            if(document.getElementById("idMasculino").checked){
+                sexoLido= 'm';
+            }else{
+                sexoLido='f';
+            }
+            
+            //grava nos vetores
+            nome.push(nomeLido);
+            salario.push(salarioLido);
+            sexo.push(sexoLido);
+
+            //testa a quantia de dados gravados. ao chegar a nove desabilita o botao salvar e ativa o mostrar
+            if(cont == 5){
+                document.getElementById("idSalvar").disabled = true;
+                document.getElementById("idMostrar").disabled=false; 
+            }
+            cont++;
+        }
+    }
+    function mostrar(){
+        var listagem = "NOME[salario]\t";
+            for(let i=0; i<nome.length; i++){
+                if(Number(sexo[i]=="f" && salario[i]>5000)){
+                    listagem+=nome[i]+"["+salario[i]+"]\t";
+                }
+            }
+            document.getElementById("idSalvar").disabled = true;
+        document.getElementById("idListagem").value=listagem;
+    }
+</script>
