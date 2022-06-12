@@ -1,0 +1,92 @@
+<!--
+    4. Crie um programa para armazenar informações meteorológicas. 
+    - Crie um vetor para armazenar 30 temperaturas.
+    - Calcular a média das temperaturas.
+    - O usuário pode informar um dia qualquer e o programa deve dizer se a temperatura desse dia estava acima ou abaixo da média.  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <output id="idContagem" name="nmContagem"></output>
+        <br>
+        <input type="number" id="idTemperatura" name="nmTemperatura" placeholder="Informa a temperatura">
+        <br>
+        <input type="button" id="idSalvar" name="nmSalvar" onclick="salvarDados();" value="Enviar"></button>
+        <br><br>
+    </form>
+    <form action="">
+        <input type="number" id="idDia" name="nmDia" min="1" max="30" placeholder="Informe o dia">
+        <br>
+        <input type="button" id="idMostrar" name="nmMostrar" onclick="mostrar();" value="Mostrar"></button>
+        <br><br>
+    </form>
+    <output id="idResultado"></output>
+</body>
+</html>
+
+<script>
+    var cont=1;
+    var temperaturaLida;
+    var tempetaturasRegistradas=[];
+    var somaTemperaturas=0;
+    var mediaTemperaturas=0;
+
+    //contagem de nomes e idades já informados
+    document.getElementById("idContagem").value = "Dia 1 de 30"
+    
+    //desabilita o botão mostrar
+    document.getElementById("idDia").disabled=true;
+    document.getElementById("idMostrar").disabled=true;
+
+      //funcao que salva os dados no array
+      function salvarDados(){
+        if(cont <= 30){;
+            // atualiza a contagem
+            document.getElementById("idContagem").value = "Dia "+(cont +1)+" de 30";
+
+            temperaturaLida = Number(document.getElementById("idTemperatura").value);
+
+            tempetaturasRegistradas.push(temperaturaLida);
+
+            //soma as temperaturas para efetuar calculo da média
+            somaTemperaturas+=temperaturaLida;
+            //calcula a média
+            mediaTemperaturas = somaTemperaturas/tempetaturasRegistradas.length;
+         
+            //testa a quantia de dados gravados. ao chegar a nove desabilita o botao salvar e ativa o mostrar
+            if(cont >= 30){  
+                document.getElementById("idContagem").value="";
+                document.getElementById("idTemperatura").disabled = true;
+                document.getElementById("idSalvar").disabled = true;
+                document.getElementById("idMostrar").disabled=false; 
+                document.getElementById("idDia").disabled = false;
+            }
+            cont++;
+        }
+    }
+
+    //mostrar os resultados
+    function mostrar(){
+        let dia = Number(document.getElementById("idDia").value);
+        //testa na posicao dia - 1, pois, o vetor vai de 0 a 29
+        let temperaturaDia = tempetaturasRegistradas[dia-1];
+
+        //testa as temperaturas em comparacao a media
+        if(temperaturaDia < mediaTemperaturas){
+            document.getElementById("idResultado").value="A temperatura do dia "+dia+" é MENOR a média";
+        }
+        else if(temperaturaDia == mediaTemperaturas){
+            document.getElementById("idResultado").value="A temperatura do dia "+dia+" é IGUAL a média";
+        } 
+        else{
+            document.getElementById("idResultado").value="A temperatura do dia "+dia+" é MAIOR a média";
+        }
+    }
+</script>

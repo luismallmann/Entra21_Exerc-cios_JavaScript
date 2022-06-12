@@ -1,0 +1,69 @@
+<!--2. Crie um programa que leia o nome e a idade de 9 pessoas e guarde esses valores em dois vetores, em posições relacionadas. 
+No final, mostre uma listagem contendo apenas os dados das pessoas menores de idade.!--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <output id="idContagem" name="nmContagem"></output>
+        <br>
+        <input type="text" id="idNome" name="nmNome" placeholder="Nome">
+        <input type="number" id="idIdade" name="nmIdade" placeholder="Idade" min="0">
+        <input type="button" id="idSalvar" name="nmSalvar" onclick="salvarDados();" value="Enviar"></button>
+        <br><br>
+    </form>
+    <button id="idMostrar" name="nmMostrar" onclick="mostrar();">Mostrar</button>
+    <br><br>
+    <output id="idListagem"></output>
+</body>
+</html>
+
+<script>
+    var cont=1;
+    var nomeLido, idadeLida;
+    var nome=[];
+    var idade=[];
+
+    //contagem de nomes e idades já informados
+    document.getElementById("idContagem").value = "Cadastro 1 de 9"
+
+    //desabilita o botão mostrar
+    document.getElementById("idMostrar").disabled=true;
+
+    //funcao que salva os dados no array
+      function salvarDados(){
+        if(cont <= 9){;
+            document.getElementById("idContagem").value = "Cadastro "+cont +" de 9";
+
+            nomeLido = document.getElementById("idNome").value;
+            idadeLida = document.getElementById("idIdade").value;
+
+            nome.push(nomeLido);
+            idade.push(idadeLida);
+
+            //testa a quantia de dados gravados. ao chegar a nove desabilita o botao salvar e ativa o mostrar
+            if(cont == 9){
+                document.getElementById("idSalvar").disabled = true;
+                document.getElementById("idMostrar").disabled=false; 
+            }
+            //conta o número de cadastrados
+            cont++;
+        }
+    }
+    //funcao que mostra os nomes e idades salvos
+    function mostrar(){
+        var listagem = "NOME[idade]\t";
+            for(let i=0; i<nome.length; i++){
+                if(Number(idade[i]<18)){
+                    listagem+=nome[i]+"["+idade[i]+"]\t";
+                }
+            }
+            document.getElementById("idSalvar").disabled = true;
+        document.getElementById("idListagem").value=listagem;
+    }
+</script>
