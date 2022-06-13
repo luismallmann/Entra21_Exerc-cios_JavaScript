@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form>
+            <input type="text" name="nmNome" id="idNome" placeholder="Nome">
+            <br>
+            <input type="text" name="nmEndereco" id="idEndereco" placeholder="Endereço">
+            <br>
+            <input type="text" name="nmPai" id="idPai" placeholder="Nome do Pai">
+            <br>
+            <input type="text" name="nmMae" id="idMae" placeholder="Nome da Mãe">
+            <br>
+            <input type="number" name="nmTelefone" id="idTefone" placeholder="Telefone" min="0" >
+            <br>
+            <input type="button" name="nmCadastrar" id="idCadastrar" value="Cadastrar Aluno" onclick="cadastrarAlunos();">
+        </form>
+    </div>
+</body>
+<script>
+    var nome=[];
+    var endereco=[];
+    var nomePai=[];
+    var nomeMae=[];
+    var telefone=[];
+
+    function cadastrarAlunos(){
+        var lerNome, lerEndereco, lerPai, lerMae, lerTelefone;
+  
+        //capturar dados do formulario
+        lerNome = document.getElementById("idNome");
+        lerEndereco = document.getElementById("idEndereco");
+        lerPai = document.getElementById("idPai");
+        lerMae = document.getElementById("idMae");
+        lerTelefone = document.getElementById("idTelefone");
+
+        //gravar dados nos vetores
+        nome.push(lerNome);
+        endereco.push(lerEndereco);
+        nomePai.push(lerPai);
+        nomeMae.push(lerMae);
+        telefone.push(lerTelefone);
+    }
+</script>
+</html>
