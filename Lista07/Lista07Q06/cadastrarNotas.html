@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form>
+            <input type="number" name="nmNota1" id="idNota1" min="0" max="10" placeholder="Nota 1">
+            <br>
+            <input type="number" name="nmNota2" id="idNota2" min="0" max="10" placeholder="Nota 2">
+            <br>
+            <input type="number" name="nmNota3" id="idNota3" min="0" max="10" placeholder="Nota 3">
+            <br>
+            <input type="number" name="nmNota4" id="idNota4" min="0" max="10" placeholder="Nota 4">
+            <br>
+            
+            
+            <input type="button" name="nmCadastrar" id="idCadastrar" value="Cadastrar Notas" onclick="cadastrarAlunos();">
+        </form>
+    </div>
+</body>
+<script>
+    var nota1=[];
+    var nota2=[];
+    var nota3=[];
+    var nota4=[];
+
+    function cadastrarAlunos(){
+        let lerNota1, lerNota2, lerNota3, lerNota4;
+        //capturar dados do formulario
+        lerNota1 = document.getElementById("idNota1");
+        lerNota2 = document.getElementById("idNota2");
+        lerNota3 = document.getElementById("idNota3");
+        lerNota4 = document.getElementById("idNota4");
+        
+        
+        //gravar dados nos vetores
+        nota1.push=Number(lerNota1);
+        nota2.push=Number(lerNota2);
+        nota3.push=Number(lerNota3);
+        nota4.push=Number(lerNota4);
+    }
+</script>
+</html>

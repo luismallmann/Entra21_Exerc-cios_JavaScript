@@ -1,0 +1,108 @@
+<!--
+5. Crie um programa para:
+    - Ler 10 números.
+    - Permitir ao usuário que escolha entre:
+        -   Ordenar em ordem crescente                
+        -   Ordenar em ordem decrescente     
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="">
+            <output id="idContagem" name="nmContagem"></output>
+            <br>
+            <input type="number" id="idNumero" name="nmNumero" placeholder="Informa um número">
+            <br>
+            <input type="button" id="idSalvar" name="nmSalvar" onclick="salvarDados();" value="Enviar"></button>
+        </form>
+    </div>
+    <div>
+        <input type="radio"  class="ordenacao" name="nmOrdenacao" id="idCrescente" value="c" onclick="ordenarCrescente(numeroSalvo);">
+        <label for="idCrescente">Crescente</label>
+        <input type="radio" name="nmOrdenacao" id="idDecrescente" value="d" onclick="ordenarDecrescente(numeroSalvo);">
+        <label for="idDecrescente">Decrescente</label>
+    </div>
+    <div>
+        <output id="idResultado"></output>
+    </div>
+</body>
+</html>
+
+<script>
+    var cont=1;
+    var numeroLido;
+    var numeroSalvo=[];
+
+    //contagem de nomes e idades já informados
+    document.getElementById("idContagem").value = "Número 1 de 10"
+    
+    //desabilita a escolha da forma de ordencao
+    document.getElementById("idCrescente").disabled=true;
+    document.getElementById("idDecrescente").disabled=true;
+
+      //funcao que salva os dados no array
+      function salvarDados(){
+        if(cont <= 10){;
+            // atualiza a contagem
+            document.getElementById("idContagem").value = "Número "+(cont +1)+" de 10";
+
+            numeroLido = Number(document.getElementById("idNumero").value);
+
+            numeroSalvo.push(numeroLido);
+
+            //testa a quantia de dados gravados. ao chegar a nove desabilita o botao salvar e ativa a escolha da ordenacao
+            if(cont >= 10){  
+                document.getElementById("idContagem").value="";
+                document.getElementById("idNumero").disabled=true;
+                document.getElementById("idSalvar").disabled=true;
+                document.getElementById("idCrescente").disabled = false;
+                document.getElementById("idDecrescente").disabled = false;
+            }
+            cont++;
+        }
+    }
+
+    //ordenar crescente
+    function ordenarCrescente(numeros){
+        let troca = true;
+        let aux;
+        //enquando troca por true
+        while (troca) {
+            troca = false;
+            for (let i = 0; i < numeros.length - 1; i++) {
+                if (numeros[i] > numeros[i + 1]) {
+                    aux = numeros[i];
+                    numeros[i] = numeros[i + 1];
+                    numeros[i + 1] = aux;
+                    troca = true;
+                }
+            }
+        }
+        document.getElementById("idResultado").value=numeros.toString();
+    }
+    
+    //ordenar decrescente
+    function ordenarDecrescente(numeros){
+        let troca = true;
+        let aux;
+        while (troca) {
+            troca = false;
+            for (let i = 0; i < numeros.length - 1; i++) {
+                if (numeros[i] < numeros[i + 1]) {
+                    aux = numeros[i];
+                    numeros[i] = numeros[i + 1];
+                    numeros[i + 1] = aux;
+                    troca = true;
+                }
+            }
+        }
+        document.getElementById("idResultado").value=numeros.toString();
+    }
+</script>
