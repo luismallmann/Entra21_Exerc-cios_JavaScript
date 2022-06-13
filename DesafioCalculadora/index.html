@@ -74,7 +74,7 @@
         </div>  
         <div id="linha"  style="display: flex; justify-content: right; padding-top: 5px;
         padding-bottom: 5px;">
-            <input type="button" id="idLimpar" name="nmLimpar" value="LIMPAR" onclick="limpar()"; style="width: 120px; background-color: orangered;">
+            <input type="button" id="idLimpar" name="nmLimpar" value="LIMPAR" onclick="limpar();" style="width: 120px; background-color: orangered;">
         </div>
         <div id="linha">
             <div id="coluna">
@@ -138,23 +138,30 @@
     <script>
         var capturaTela="";
         var operacao="";
-        var numeroAnterior = numeroAtual = resultadoOperacao = "";
+        var numeroAnterior = "";
+        var numeroAtual = "";
+        var resultadoOperacao = "";
+
+        //Função que captura os botões clicados e mostra na tela;
         function informarDados(botao){
 
+            //Identifica se o botão apertado é igual a uma operação
             if((botao == '+') ||  (botao == '-') || (botao == '/') || (botao == '*')){
-            
+                //Testa se já foi realizada alguma operação anteriormente
                 if(operacao == ""){
                     operacao = botao;
                     numeroAtual = Number(capturaTela);
                     capturaTela = "";
                     document.getElementById("idResultado").value = capturaTela;
                 }
+                //Valida a partir da segunda operação em sequencia
                 else{
+                    //recebe nova operação
                     operacao = botao;
                     numeroAnterior = numeroAtual;
                     numeroAtual = Number(capturaTela);
-                    console.log(numeroAnterior+'/'+numeroAtual);
-                   
+                    
+                    //chama a função da operação informada
                     switch(operacao){
                         case '+':{
                             soma(numeroAnterior,numeroAtual);break;
@@ -165,24 +172,28 @@
                         case '-':subtracao(numeroAnterior, numeroAtual);break;
                         case '*':multiplicacao(numeroAnterior, numeroAtual); break;
                         case '/':divisao(numeroAnterior, numeroAtual);break;
-                        default: aler('Opção Inválida');
+                        default: aler('Opção Inválida');break;
                     }
                     
                 }
             }
+            //valida quando solictado o calculo
             else if(botao == "="){
                 numeroAnterior = numeroAtual;
                 numeroAtual = Number(capturaTela);
                 capturaTela = "";
 
-                switch(operacao){
+                if((numeroAnterior != "") && (numeroAtual != "")){
+                    switch(operacao){
                     case '+':soma(numeroAnterior,numeroAtual);break;
                     case '-':subtracao(numeroAnterior, numeroAtual);break;
                     case '*':multiplicacao(numeroAnterior, numeroAtual); break;
                     case '/':divisao(numeroAnterior, numeroAtual);break;
-                    default: alert('Opção Inválida');
+                    default: alert('Opção Inválida');break;
                 }
+             }
             }
+            //grava os numeros informados na tela enquanto nao for informada nenhuma operação
             else{
                 if(operacao != "")
                     capturaTela = "";
@@ -191,32 +202,48 @@
                 document.getElementById("idResultado").value = capturaTela;
             }
         }
+        //funcao que efetua a soma de dois números
         function soma(numero1, numero2){
             resultadoOperacao = numero1 + numero2;
             document.getElementById("idResultado").value = resultadoOperacao;
             document.getElementById("idOperacao").value = ""+ numero1 + " + " + numero2;
             numeroAtual = resultadoOperacao;
         }
+        //funcao que efetua a subtração de dois números
         function subtracao(numero1, numero2){
             resultadoOperacao = numero1 - numero2;
             document.getElementById("idResultado").value = resultadoOperacao;
             document.getElementById("idOperacao").value = ""+ numero1 + " - " + numero2;
             numeroAtual = resultadoOperacao;
         }
+        //funcao que efetua a multiplicação de dois números
         function multiplicacao(numero1, numero2){
             resultadoOperacao = numero1 * numero2;
             document.getElementById("idResultado").value = resultadoOperacao;
             document.getElementById("idOperacao").value = ""+ numero1 + " * " + numero2;
             numeroAtual = resultadoOperacao;
         }
+        //funcao que efetua a divisão de dois números
         function divisao(numero1, numero2){
-            resultadoOperacao = numero1 / numero2;
+            //testa se o divisor é 0
+            if(numero2==0){
+                resultadoOperacao = 'erro != 0';
+            }
+            else{
+                resultadoOperacao = numero1 / numero2;
+            }
             document.getElementById("idOperacao").value = ""+ numero1 + " / " + numero2;
             document.getElementById("idResultado").value = resultadoOperacao;
             numeroAtual = resultadoOperacao;
         }
+        //funcao que limpa a tela e os dados capturados
         function limpar(){
-            numeroAnterior = numeroAtual = operacao = "";
+            capturaTela = "";
+            numeroAnterior = "";
+            numeroAtual = "";
+            operacao = "";
+            document.getElementById("idOperacao").value = "";
+            document.getElementById("idResultado").value = "";
         }
 
         
