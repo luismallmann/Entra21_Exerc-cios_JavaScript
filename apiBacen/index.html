@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div>
+            <form action="">
+                <label for="idMoeda">Moeda</label>
+                <select name="nmMoeda" id="idMoeda">
+                    <option value="AUD">Dólar Australiano</option>
+                    <option value="CAD">Dólar Canadense</option>
+                    <option value="CHF">Franco Suíço</option>
+                    <option value="EUR">Euro</option>
+                    <option value="GBP">Libra Esterlina</option>
+                    <option value="JPY">Iene</option>
+                    <option value="NOK">Coroa Norueguesa</option>
+                    <option value="SEK">Coroa Sueca</option>
+                    <option value="USD">Dólar dos Estados Unidos</option>
+                </select>
+                <br>
+                <label for="idData">Data</label>
+                <input type="text" name="nmData" id="idData" placeholder="MM-DD-YYYY">
+                <input type="button" name="nmBtCotacao" id="idBtCotacao" value="Cotação">
+            </form>
+        </div>
+        <div>
+            <output id="idValor"> </output>
+        </div>
+        <script>
+            
+            btCotacao = document.getElementById("idBtCotacao");
+
+            btCotacao.onclick = function(){
+                let moeda = document.getElementById("idMoeda").value;
+                let data = document.getElementById("idData").value;
+
+                buscarCotacao(moeda,data);
+            }
+           
+            function buscarCotacao(moeda,data) {
+                //AJAX
+                var xhr = new XMLHttpRequest(); 
+                
+                console.log("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim");
+
+                xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
+
+                xhr.addEventListener("load", function(){
+                    var resposta = xhr.responseText;
+                    exibirCotacao(resposta)
+                })
+                
+                xhr.send()
+
+            }
+
+            function exibirCotacao(params) {
+                
+                let resultado=JSON.parse(params);
+
+                cotacao = resultado.value[4].cotacaoVenda;
+                
+                document.getElementById("idValor").value = cotacao;
+            }
+
+        </Script>
+    </body>
+</html>
