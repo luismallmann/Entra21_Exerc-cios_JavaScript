@@ -5,46 +5,133 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                padding-top: 50px;
+                display: flex;
+                background-color: lightblue;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: darkblue;
+            }    
+            form{
+                align-items: center;
+                flex-direction: row;
+                margin: 0 auto;
+                border:2px solid ;
+                border-radius: 5px;
+                width: 80%;
+                max-width: 650px;
+                min-width: 550px;
+            }
+            .secao{
+                padding: 10px;
+                display: flex;
+                justify-content: space-evenly;
+            }
+            .coluna{
+                flex: 1;
+                justify-content: space-evenly;
+            }
+            .linha{
+                width: 100%;
+            }   
+            .button{
+            background-color: darkblue;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            }
+ 
+        </style>    
     </head>
     <body>
-        <div>
+      
             <form action="">
-                <label for="idMoedaInicial">Moeda</label>
-                <select name="nmMoedaInicial" id="idMoedaInicial">
-                    <option value="RS">Reais</option>
-                    <option value="AUD">Dólar Australiano</option>
-                    <option value="CAD">Dólar Canadense</option>
-                    <option value="CHF">Franco Suíço</option>
-                    <option value="EUR">Euro</option>
-                    <option value="GBP">Libra Esterlina</option>
-                    <option value="JPY">Iene</option>
-                    <option value="NOK">Coroa Norueguesa</option>
-                    <option value="SEK">Coroa Sueca</option>
-                    <option value="USD">Dólar dos Estados Unidos</option>
-                </select>
-                <br>
-                <label for="idValor">Valor</label>
-                <input type="number" name="nmValor" id="idValor">
-                <label for="idData">Data</label>
-                <input type="text" name="nmData" id="idData" placeholder="MM-DD-YYYY">
-                <label for="idMoedaFinal">Moeda</label>
-                <select name="nmMoedaFinal" id="idMoedaFinal">
-                    <option value="RS">Reais</option>
-                    <option value="AUD">Dólar Australiano</option>
-                    <option value="CAD">Dólar Canadense</option>
-                    <option value="CHF">Franco Suíço</option>
-                    <option value="EUR">Euro</option>
-                    <option value="GBP">Libra Esterlina</option>
-                    <option value="JPY">Iene</option>
-                    <option value="NOK">Coroa Norueguesa</option>
-                    <option value="SEK">Coroa Sueca</option>
-                    <option value="USD">Dólar dos Estados Unidos</option>
-                </select>
-                <input type="button" name="nmBtConverter" id="idBtConverter" value="Converter">
-            </form>
-        </div>
-        <div>
-            <output id="idresultadoConversao"> </output>
+                <div class="linha" style="background-color: darkblue; color: white;">
+                    <h1 style="padding: 10px">Conversor de Moedas</h1>
+                    <br>
+                </div>
+                <div id="idsecao" class="">
+                    <div id="idFormData" class="linha" style="padding-left: 10px;">
+                        <label for="idData">Data</label>
+                    </div>        
+                    <div id="idFormData" class="linha" style="padding-left: 10px;">
+                        <input type="text" name="nmData" id="idData"placeholder="MM-DD-YYYY">
+                    </div>
+                    <div class="linha">
+                        <section class="secao">
+                            <div class="coluna">
+                                <label for="idValor">Valor</label>
+                            </div>
+                            <div class="coluna">
+                                <label for="idMoedaInicial">Moeda</label>
+                            </div>
+                            <div class="coluna">
+                                <label for="idMoedaFinal">Moeda</label>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="linha">
+                        <section class="secao">
+                            <div class="coluna">
+                                <input type="number" name="nmValor" id="idValor" placeholder="0,00" min="0">    
+                            </div>
+                            <div class="coluna">
+                                <select name="nmMoedaInicial" id="idMoedaInicial">
+                                    <option value="RS">Real</option>
+                                    <option value="AUD">Dólar Australiano</option>
+                                    <option value="CAD">Dólar Canadense</option>
+                                    <option value="CHF">Franco Suíço</option>
+                                    <option value="EUR">Euro</option>
+                                    <option value="GBP">Libra Esterlina</option>
+                                    <option value="JPY">Iene</option>
+                                    <option value="NOK">Coroa Norueguesa</option>
+                                    <option value="SEK">Coroa Sueca</option>
+                                    <option value="USD">Dólar dos Estados Unidos</option>
+                                </select>
+                            </div>
+                            <div class="coluna">
+                                <select name="nmMoedaFinal" id="idMoedaFinal">
+                                    <option value="RS">Real</option>
+                                    <option value="AUD">Dólar Australiano</option>
+                                    <option value="CAD">Dólar Canadense</option>
+                                    <option value="CHF">Franco Suíço</option>
+                                    <option value="EUR">Euro</option>
+                                    <option value="GBP">Libra Esterlina</option>
+                                    <option value="JPY">Iene</option>
+                                    <option value="NOK">Coroa Norueguesa</option>
+                                    <option value="SEK">Coroa Sueca</option>
+                                    <option value="USD">Dólar dos Estados Unidos</option>
+                                </select>   
+                            </div>
+                        </section>       
+                    </div>
+                    <br>
+                    <div class="linha" style="text-align: center">
+                        <input class="button" type="button" name="nmBtConverter" id="idBtConverter" value="Converter">
+                    </div>
+        </form>
+        <div class="linha" id="idMostrarResultados" style="visibility: hidden; padding: 10px;">
+            <br><br>
+            <h3>Resultado</h3>
+            <label for="idData"><b>Data da Cotação:</b></label>
+            <output id="idDataInformada"></output><br>
+            <label for="idCotacaoOriginal"><b>Cotação Orginal [Moeda]:</b></label>
+            <output id="idCotacaoOriginal"></output><br>
+            <label for="idCotacaoConversao"><b>Cotação Conversão [Moeda]:</b></label>
+            <output id="idCotacaoConversao"></output><br>
+            <label for="idResultadoConversao"><b>Resultado da Conversão:</b></label>
+            <output id="idResultadoConversao"></output><br>
         </div>
         <script>
             //Vincula o elemento (botão) JavaScript com o elemento HTML
@@ -52,6 +139,8 @@
 
             //Ação do botão com o evento onclick
             btCotacao.onclick = async function(){
+
+                
                 //Captura os valores de Moeda e Data
                 let moedaInicial = document.getElementById("idMoedaInicial").value;
                 let moedaFinal = document.getElementById("idMoedaFinal").value;
@@ -81,8 +170,9 @@
 
             //Função responsável pela conversão de moedas
             async function converterMoedas(data, valor, moedaInicial, moedaFinal){       
-                let cotacaoMoedaInicial;
-                let cotacaoMoedaFinal;
+                //Inicializado com 1.0 devido ao RS
+                let cotacaoMoedaInicial=1.0;
+                let cotacaoMoedaFinal=1.0;
                 let resultadoConversao;
                 
                 //Moeda Inicial é IGUAL a RS
@@ -118,8 +208,15 @@
                     }
                 }        
 
+                document.getElementById("idMostrarResultados").style.visibility="visible";
+                document.getElementById("idMostrarResultados").style.display="block";
+                
                 //Retorna o valores ao HTML
-                document.getElementById("idresultadoConversao").value = resultadoConversao.toFixed(2);
+                document.getElementById("idDataInformada").value = data;
+                document.getElementById("idCotacaoOriginal").value = cotacaoMoedaInicial.toFixed(4) + "["+moedaInicial+"]";
+                document.getElementById("idCotacaoConversao").value = cotacaoMoedaFinal.toFixed(4)+ "["+moedaFinal+"]";
+                document.getElementById("idResultadoConversao").value = resultadoConversao.toFixed(4);
+
             }
         </script>
     </body>
