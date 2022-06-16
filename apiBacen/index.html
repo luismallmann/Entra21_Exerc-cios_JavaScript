@@ -24,7 +24,7 @@
                 <br>
                 <label for="idData">Data</label>
                 <input type="text" name="nmData" id="idData" placeholder="MM-DD-YYYY">
-                <input type="button" name="nmBtCotacao" id="idBtCotacao" value="Cotação">
+                l
             </form>
         </div>
         <div>
@@ -45,13 +45,11 @@
                 //AJAX
                 var xhr = new XMLHttpRequest(); 
                 
-                console.log("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim");
-
                 xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
 
                 xhr.addEventListener("load", function(){
                     var resposta = xhr.responseText;
-                    exibirCotacao(resposta)
+                    exibirCotacao(resposta);
                 })
                 
                 xhr.send()
@@ -61,12 +59,22 @@
             function exibirCotacao(params) {
                 
                 let resultado=JSON.parse(params);
+                let retonoCotacao="";
 
-                cotacao = resultado.value[4].cotacaoVenda;
-                
-                document.getElementById("idValor").value = cotacao;
+                resultado.value.forEach(function(nome, i) {
+                    let cotacao;
+                    let hora;
+
+                      cotacao= nome.cotacaoVenda;
+                      hora= new Date(nome.dataHoraCotacao);
+                    
+                      hora= hora.getHours()+":"+hora.getMinutes();
+                    
+                      retonoCotacao += "Horário:"+ hora + "->" + cotacao + "\t";                      
+                      console.log(cotacao + "-"+hora);
+                });
+                document.getElementById("idValor").value=retonoCotacao;
             }
-
-        </Script>
+        </script>
     </body>
 </html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div>
+            <form action="">
+                <label for="idMoedaInicial">Moeda</label>
+                <select name="nmMoedaInicial" id="idMoedaInicial">
+                    <option value="RS">Reais</option>
+                    <option value="AUD">Dólar Australiano</option>
+                    <option value="CAD">Dólar Canadense</option>
+                    <option value="CHF">Franco Suíço</option>
+                    <option value="EUR">Euro</option>
+                    <option value="GBP">Libra Esterlina</option>
+                    <option value="JPY">Iene</option>
+                    <option value="NOK">Coroa Norueguesa</option>
+                    <option value="SEK">Coroa Sueca</option>
+                    <option value="USD">Dólar dos Estados Unidos</option>
+                </select>
+                <br>
+                <label for="idValor">Valor</label>
+                <input type="number" name="nmValor" id="idValor">
+                <label for="idData">Data</label>
+                <input type="text" name="nmData" id="idData" placeholder="MM-DD-YYYY">
+                <label for="idMoedaFinal">Moeda</label>
+                <select name="nmMoedaFinal" id="idMoedaFinal">
+                    <option value="RS">Reais</option>
+                    <option value="AUD">Dólar Australiano</option>
+                    <option value="CAD">Dólar Canadense</option>
+                    <option value="CHF">Franco Suíço</option>
+                    <option value="EUR">Euro</option>
+                    <option value="GBP">Libra Esterlina</option>
+                    <option value="JPY">Iene</option>
+                    <option value="NOK">Coroa Norueguesa</option>
+                    <option value="SEK">Coroa Sueca</option>
+                    <option value="USD">Dólar dos Estados Unidos</option>
+                </select>
+                <input type="button" name="nmBtConverter" id="idBtConverter" value="Converter">
+            </form>
+        </div>
+        <div>
+            <output id="idConversao"> </output>
+        </div>
+        <script>
+            btCotacao = document.getElementById("idBtConverter");
+
+            btCotacao.onclick = function(){
+                let moedaInicial = document.getElementById("idMoedaInicial").value;
+                let moedaFinal = document.getElementById("idMoedaFinal").value;
+                let data = document.getElementById("idData").value;
+                let valor = document.getElementById("idValor").value;
+
+                let cotacaoMoedaInicial = 0.0;
+                let cotacaoMoedaFinal;
+                let conversao = 0.0;
+        
+                //cotacaoMoedaInicial = buscarCotacao(moedaInicial, data);
+                cotacaoMoedaFinal = cotacaoMoedaFinal.addEventListener("reading", buscarCotacao(moedaFinal,data));
+                console.log(cotacaoMoedaFinal +"pa");
+
+                //converterMoedas(data,valor,moedaInicial,moedaFinal);
+            }
+
+            function buscarCotacao(moeda,data) {
+                //AJAX
+                var xhr = new XMLHttpRequest();
+                var retorno;
+                          
+                xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
+
+                xhr.addEventListener("load", function(){
+                    var resposta = xhr.responseText;
+                    retorno = exibirCotacao(resposta);
+                    
+                    return retorno;
+                })
+                
+                xhr.send();
+            }
+
+            function exibirCotacao(params) {
+                let resultado=JSON.parse(params);
+                let retornoCotacao="";
+
+                resultado.value.forEach(function(info, i) {
+                    retornoCotacao= info.cotacaoVenda;
+                });
+                return retornoCotacao;
+            }
+
+            function converterMoedas(data, valor, moedaInicial, moedaFinal){
+                              
+                if(moedaInicial == "RS"){
+                    conversao = valor/cotacaoMoedaFinal;
+                }
+                else{
+                    if(moedaFinal == "RS"){
+                        conversao = valor;
+                    }
+                    else{
+                        conversao = (valor*moedaInicial)/moedaFinal;
+                    }
+                }        
+                 document.getElementById("idConversao").value = conversao.toFixed(2);
+            }
+        </Script>
+    </body>
+</html>
