@@ -31,22 +31,28 @@
             <output id="idValor"> </output>
         </div>
         <script>
-            
-            btCotacao = document.getElementById("idBtCotacao");
+            //Vincula o elemento JavaScript com o elemento HTML
+            var btCotacao = document.getElementById("idBtCotacao");
 
+            //Ação do botão com o evento onclick
             btCotacao.onclick = function(){
+                //Captura os valores de Moeda e Data
                 let moeda = document.getElementById("idMoeda").value;
                 let data = document.getElementById("idData").value;
 
-                buscarCotacao(moeda,data);
+                //Chama a função que busca a cotação dos valotes
+                buscarCotacao(moeda,data);          
             }
            
+            //Função que busca a cotação via API
             function buscarCotacao(moeda,data) {
-                //AJAX
+                //Inicializa a requisão
                 var xhr = new XMLHttpRequest(); 
-                
+
+                //Faz a requisição
                 xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
 
+                //Aguarda o processamento e chama a função que exibe os dados capturados
                 xhr.addEventListener("load", function(){
                     var resposta = xhr.responseText;
                     exibirCotacao(resposta);
@@ -55,25 +61,28 @@
                 xhr.send()
 
             }
-
+            //Funcão que trata os dados retornados no Json
             function exibirCotacao(params) {
                 
                 let resultado=JSON.parse(params);
-                let retonoCotacao="";
+                let retornoCotacoes="";
 
+
+                /*Lê os dados capturados referentes as cotações do dia e salva em uma string informações em refente a hora e valor de cotação*/
                 resultado.value.forEach(function(nome, i) {
                     let cotacao;
                     let hora;
 
                       cotacao= nome.cotacaoVenda;
+                      //Tratamento para identificação do horário da cotação
                       hora= new Date(nome.dataHoraCotacao);
-                    
                       hora= hora.getHours()+":"+hora.getMinutes();
                     
-                      retonoCotacao += "Horário:"+ hora + "->" + cotacao + "\t";                      
-                      console.log(cotacao + "-"+hora);
-                });
-                document.getElementById("idValor").value=retonoCotacao;
+                      retornoCotacoes += "Horário:"+ hora + "->" + cotacao + "\t";                      
+                 });
+
+                //Retorna a string com as cotações ao HTML 
+                document.getElementById("idValor").value=retornoCotacoes;
             }
         </script>
     </body>
