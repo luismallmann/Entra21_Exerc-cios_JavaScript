@@ -44,69 +44,82 @@
             </form>
         </div>
         <div>
-            <output id="idConversao"> </output>
+            <output id="idresultadoConversao"> </output>
         </div>
         <script>
+            //Vincula o elemento (botão) JavaScript com o elemento HTML
             btCotacao = document.getElementById("idBtConverter");
 
-            btCotacao.onclick = function(){
+            //Ação do botão com o evento onclick
+            btCotacao.onclick = async function(){
+                //Captura os valores de Moeda e Data
                 let moedaInicial = document.getElementById("idMoedaInicial").value;
                 let moedaFinal = document.getElementById("idMoedaFinal").value;
                 let data = document.getElementById("idData").value;
-                let valor = document.getElementById("idValor").value;
-
-                let cotacaoMoedaInicial = 0.0;
-                let cotacaoMoedaFinal;
-                let conversao = 0.0;
-        
-                //cotacaoMoedaInicial = buscarCotacao(moedaInicial, data);
-                cotacaoMoedaFinal = cotacaoMoedaFinal.addEventListener("reading", buscarCotacao(moedaFinal,data));
-                console.log(cotacaoMoedaFinal +"pa");
-
-                //converterMoedas(data,valor,moedaInicial,moedaFinal);
-            }
-
-            function buscarCotacao(moeda,data) {
-                //AJAX
-                var xhr = new XMLHttpRequest();
-                var retorno;
-                          
-                xhr.open("GET", "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim")
-
-                xhr.addEventListener("load", function(){
-                    var resposta = xhr.responseText;
-                    retorno = exibirCotacao(resposta);
-                    
-                    return retorno;
-                })
+                let valor = Number(document.getElementById("idValor").value);
                 
-                xhr.send();
+                //Chama a função que realiza a conversão entre moedas
+                await converterMoedas(data,valor,moedaInicial,moedaFinal);
             }
+            
+            //Função que busca a cotação via API
+            async function buscarCotacao(moeda,data) {
+                var retornoCotacao;
 
-            function exibirCotacao(params) {
-                let resultado=JSON.parse(params);
-                let retornoCotacao="";
+                    //Solicitcao das ifnromações
+                    var resposta = await fetch ("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?@moeda='"+moeda+"'&@dataCotacao='"+data+"'&$top=100&$format=json&$select=paridadeCompra,paridadeVenda,cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim");
+                    var resultado= await resposta.json();   
 
-                resultado.value.forEach(function(info, i) {
-                    retornoCotacao= info.cotacaoVenda;
-                });
+                    //Captura dos resultados. Com a utilização do foreach ira percorrer todo o array até chegar sempre na ultima cotação
+                    resultado.value.forEach(function(info, i) {
+                        retornoCotacao= info.cotacaoVenda;
+                    });
+                
+                //Retorna o valor da última cotação
                 return retornoCotacao;
             }
 
-            function converterMoedas(data, valor, moedaInicial, moedaFinal){
-                              
+            //Função responsável pela conversão de moedas
+            async function converterMoedas(data, valor, moedaInicial, moedaFinal){       
+                let cotacaoMoedaInicial;
+                let cotacaoMoedaFinal;
+                let resultadoConversao;
+                
+                //Moeda Inicial é IGUAL a RS
                 if(moedaInicial == "RS"){
-                    conversao = valor/cotacaoMoedaFinal;
-                }
-                else{
-                    if(moedaFinal == "RS"){
-                        conversao = valor;
+                    //Moeda Incial e Final é IGUAL a RS
+                    if(moedaFinal=="RS"){
+                       resultadoConversao = valor;
                     }
+                    //Moeda Inicial IGUAL a RS e final DIFERENTE
                     else{
-                        conversao = (valor*moedaInicial)/moedaFinal;
+                        cotacaoMoedaFinal = await buscarCotacao(moedaFinal, data);
+
+                        //Basta dividir o valor a converter pelo valor da cotação
+                        resultadoConversao = await valor/cotacaoMoedaFinal;
+                    }
+                }
+                //Moeda inicial DIFERENTE de RS
+                else{
+                    //Moeda Inicial DIFERENTE de RS e Moeda final IGUAL ao RS
+                    if(moedaFinal == "RS"){
+                        cotacaoMoedaInicial = await buscarCotacao(moedaInicial, data);        
+                        
+                        //Basta multiplicar o valor a converter pelo valor da cotação
+                        resultadoConversao = await cotacaoMoedaInicial*valor;
+                    }
+                    //Moeda incial e final DIFERENTE de RS
+                    else{
+                        cotacaoMoedaInicial = await buscarCotacao(moedaInicial, data);        
+                        cotacaoMoedaFinal =  await buscarCotacao(moedaFinal,data);
+                        
+                        //Calculo da conversão entre moedas
+                        resultadoConversao = await (valor*cotacaoMoedaInicial)/cotacaoMoedaFinal;
                     }
                 }        
-                 document.getElementById("idConversao").value = conversao.toFixed(2);
+
+                //Retorna o valores ao HTML
+                document.getElementById("idresultadoConversao").value = resultadoConversao.toFixed(2);
             }
         </Script>
     </body>
