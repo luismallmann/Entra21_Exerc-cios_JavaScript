@@ -17,19 +17,101 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sistema Escolar</title>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+       
+    }
+    .topo{
+        width: 100%;
+        height: 100px;
+        background-color: green;
+        display: flex;
+        align-items: center;
+    }
+    .lateral{
+        width: 25%;
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgreen;
+    }
+    .conteudo{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    .pagina{
+        display: flex;  
+    }
+    .section{
+        align-self:center;
+    }
+    .button{
+                background-color: green;
+                border-radius: 5px;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                width: 80%;
+    }
+</style>
 </head>
 <body>
-    <div>
-        <button id="idAddAluno" onclick="">Cadastrar Aluno</button>
-        <button id="idAddNotas" onclick="">Cadastrar Notas</button>
-        <button id="idConsultar" onclick="">Consultar Situação</button>
+    <div id="idTopo" class="topo">
+        <h1>Sistema Escolar</h1>
     </div>
-    <div>
-        
+    <div class="pagina">    
+        <div id="idLateral" class="lateral">
+            <section>
+                <div style="padding: 10px;">
+                    <button class="button" id="idCadAluno">Cadastrar Alunos</button>
+                </div>
+                <div style="padding: 10px;">
+                    <button class="button" id="idCadNotas">Cadastrar Notas</button>
+                </div>
+                <div style="padding: 10px;">
+                    <button class="button" id="idConsultar">Consultar Cadastro</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="idConteudo" class="conteudo">
+            <iframe id="idPaginaExibida" ></iframe>
+        </div>
+
+        <div id="idLateral" class="lateral">
+
+        </div>
     </div>
 </body>
+<script>
+    var pagina = document.getElementById("idPaginaExibida");
+    var btCadastrarAluno =  document.getElementById("idCadAluno");
+    var btCadastrarNotas =  document.getElementById("idCadNotas");
+    var btConsultar =  document.getElementById("idConsultar");
+
+    btCadastrarAluno.onclick=function(){
+        pagina.src="pages/cadastrarAluno.html";
+    }   
+
+    btCadastrarNotas.onclick=function(){
+        pagina.src="pages/cadastrarNotas.html";
+    }   
+    
+    btConsultar.onclick=function(){
+        pagina.src="pages/consultarSituacao.html";
+    }
+</script>
 </html>
 
-<script>
-</script>
