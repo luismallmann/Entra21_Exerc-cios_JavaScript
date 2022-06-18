@@ -6,24 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-
+              *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                padding-top: 50px;
+                display: flex;
+                background-color: darkkhaki;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: darkred;
+            }    
+            form{
+                align-items: center;
+                flex-direction: row;
+                margin: 0 auto;
+                border:2px solid ;
+                border-radius: 5px;
+                width: 80%;
+                max-width: 650px;
+                min-width: 550px;
+            }
+            .secao{
+                display: flex;
+                justify-content: space-evenly;
+            }
+            .coluna{
+                flex: 1;
+                justify-content: space-evenly;
+            }
+            .linha{
+                width: 100%;
+            }   
+            .button{
+                background-color: darkred;
+                border-radius: 5px;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
     </style>
 </head>
 <body>
-    <form action="">
-        <div>
-            <text>Tipo</text>
-            <text>Tamanho (cm)</text>
-            <text>Preço (R$)</text>
+    <div class="linha">
+        <div class="linha" style="text-align: center">
+            <img src="img/logo.png" alt="logo pizza" height="250px">
+            <h5 style="font-size: 32px;">Calculadora - Custo X Benefício de Pizzas</h5>
         </div>
-        <div>
-            <input type="text" name="nmTipo" id="idTipo">
-            <input type="number" name="nmTamanhoBroto" id="idTamanhoBroto" min="0">
-            <input type="number" name="nmPrecoBroto" id="nmPrecoBroto" min="0">
+        <div class="linha" style="padding-top: 50px">
+            <form action="">
+                <div class="linha">
+                    <section class="secao">
+                        <div class="coluna">  
+                            <text>Tipo</text>
+                        </div>
+                        <div class="coluna">
+                            <text>Tamanho (cm)</text>
+                        </div>
+                        <div class="coluna">
+                            <text>Preço (R$)</text>
+                        </div>    
+                    </section>
+                </div>
+                <div class="linha">
+                    <section class="secao">
+                        <div class="coluna">  
+                            <input type="text" name="nmTipo" id="idTipo" placeholder="Broto">
+                        </div>
+                        <div class="coluna">
+                            <input type="number" name="nmTamanhoBroto" id="idTamanhoBroto" min="0" placeholder="10">
+                        </div>
+                        <div class="coluna">
+                            <input type="number" name="nmPrecoBroto" id="nmPrecoBroto" min="0" placeholder="25,00" step="0.50">
+                        </div>    
+                    </section>
+                    </div>
+                    <div class="linha" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
+                        <input type="submit" class="button" id="idCadastrar" name="nmCadastrar">
+                    </div>
+             </form>
         </div>
-        <input type="submit" id="idCadastrar" name="nmCadastrar">
-    </form>
-    <label for="idCastradas">Modelos Cadastrados</label>
-    <output id="idCadastradas"></output>
+    
+        <div class="linha" style="text-align: center; padding-top: 10px;">
+            <label for="idCastradas">Tipos Cadastrados</label>
+            <output id="idCadastradas"></output>
+        </div>
+    </div>
 </body>
 </html>
