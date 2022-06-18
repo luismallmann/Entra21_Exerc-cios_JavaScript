@@ -78,15 +78,15 @@
                             <input type="text" name="nmTipo" id="idTipo" placeholder="Broto">
                         </div>
                         <div class="coluna">
-                            <input type="number" name="nmTamanhoBroto" id="idTamanhoBroto" min="0" placeholder="10">
+                            <input type="number" name="nmTamanho" id="idTamanho" min="0" placeholder="10">
                         </div>
                         <div class="coluna">
-                            <input type="number" name="nmPrecoBroto" id="nmPrecoBroto" min="0" placeholder="25,00" step="0.50">
+                            <input type="number" name="nmPreco" id="idPreco" min="0" placeholder="25,00" step="0.50">
                         </div>    
                     </section>
                     </div>
                     <div class="linha" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
-                        <input type="submit" class="button" id="idCadastrar" name="nmCadastrar">
+                        <input type="button" class="button" id="idCadastrar" name="nmCadastrar" value="Cadastrar">
                     </div>
              </form>
         </div>
@@ -97,4 +97,19 @@
         </div>
     </div>
 </body>
+<script>
+    var btCadastrar = document.getElementById("idCadastrar");
+
+    btCadastrar.onclick = function(){
+        let tipo;
+        let tamanho;
+        let preco;
+
+        tipo = document.getElementById("idTipo").value;
+        tamanho = Number(document.getElementById("idTamanho").value);
+        preco = Number(document.getElementById("idPreco").value);
+
+        
+    }
+</script>
 </html>
