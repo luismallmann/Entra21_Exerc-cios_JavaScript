@@ -65,7 +65,7 @@
                             <text>Tipo</text>
                         </div>
                         <div class="coluna">
-                            <text>Tamanho (cm)</text>
+                            <text>Diâmetro (cm)</text>
                         </div>
                         <div class="coluna">
                             <text>Preço (R$)</text>
@@ -75,41 +75,115 @@
                 <div class="linha">
                     <section class="secao">
                         <div class="coluna">  
-                            <input type="text" name="nmTipo" id="idTipo" placeholder="Broto">
+                            <input type="text" name="nmTipo" id="idTipo" placeholder="Broto" required>
                         </div>
                         <div class="coluna">
-                            <input type="number" name="nmTamanho" id="idTamanho" min="0" placeholder="10">
+                            <input type="number" name="nmTamanho" id="idTamanho" min="0" placeholder="10" required>
                         </div>
                         <div class="coluna">
-                            <input type="number" name="nmPreco" id="idPreco" min="0" placeholder="25,00" step="0.50">
+                            <input type="number" name="nmPreco" id="idPreco" min="0" placeholder="25,00" step="0.50" required>
                         </div>    
                     </section>
                     </div>
                     <div class="linha" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
-                        <input type="button" class="button" id="idCadastrar" name="nmCadastrar" value="Cadastrar">
+                        <input type="submit" class="button" id="idCadastrar" name="nmCadastrar" value="Cadastrar">
                     </div>
              </form>
         </div>
-    
         <div class="linha" style="text-align: center; padding-top: 10px;">
-            <label for="idCastradas">Tipos Cadastrados</label>
-            <output id="idCadastradas"></output>
+            <label for="idTipoCadastrados">Tipos Cadastrados</label>
+            <output id="idTipoCadastrados"></output>
         </div>
+        <div class="linha" style="text-align: center; padding-top: 50px; padding-bottom: 20px;">
+            <input type="button" class="button" id="idExibir" name="nmExibir" value="Mostrar Custo X Benefício">
+            <h5>*O resultado é exibido no console do navegador</h5>
+        </div>
+
     </div>
 </body>
 <script>
-    var btCadastrar = document.getElementById("idCadastrar");
+    var btCadastrar, btExibir;
+    var retornoTipos="";
+    //var tipoPizzas = [];
+    //var tamanhoPizzas =[];
+    //var precoPizzas = [];
+
+    var pizzasCadastradas = [];
+
+    
+    btCadastrar = document.getElementById("idCadastrar");
+    btExibir = document.getElementById("idExibir");
 
     btCadastrar.onclick = function(){
         let tipo;
         let tamanho;
         let preco;
-
+        
+        //Captura os valores informados no HTML
         tipo = document.getElementById("idTipo").value;
         tamanho = Number(document.getElementById("idTamanho").value);
         preco = Number(document.getElementById("idPreco").value);
 
-        
-    }
+        //Testa se os elementos realmente foram informados (diferente de ""). Caso sim, grava no array e atualiza a tela
+        if((tipo != "") && (tamanho != "") && (preco != "")){
+            //Limpa os campos da tela
+            document.getElementById("idTipo").value = ""
+            document.getElementById("idTamanho").value="";
+            document.getElementById("idPreco").value="";
+
+
+            //Grava os valores lido no array
+            //tipoPizzas.push(tipo);
+            //tamanhoPizzas.push(Number(tamanho));
+            //precoPizzas.push(Number(preco));
+            pizzasCadastradas.push({tipoPizzas:tipo, tamanhoPizzas: tamanho, precoPizzas: preco, custoArea:""});
+
+            //Retorna os tipos informados e gravados no array para o HTML, informando na tela
+            retornoTipos += tipo + ", ";
+            
+            document.getElementById("idTipoCadastrados").value="["+retornoTipos+"]";
+        }
+    } 
+    
+    btExibir.onclick = function(){
+            let custoArea=[];
+            let area;
+            let pizzaAnalisada;
+            
+            for(let i = 0; i < pizzasCadastradas.length; i++){
+                //busca o objeto analisado no momento
+                pizzaAnalisada = pizzasCadastradas[i];
+
+                //Área da pizza (tamanho / 2 devido ao tamanho inicial ser o diametro e não o raio)
+                area = 3.14 * Math.pow((pizzaAnalisada.tamanhoPizzas/2),2);
+                
+                //Cálculo do valor da pizza por cm2 e guarda no objeto
+                pizzasCadastradas[i].custoArea=Number(pizzaAnalisada.precoPizzas/area).toFixed(3);
+            }    
+            
+            //Ordenação em forma crescente por custo por área(menor para maior)
+            pizzasCadastradas.sort(function (a,b){
+                return a.custoArea - b.custoArea;         
+            });
+
+            //Exibir resultados
+            console.log("Nome\tDiâmetro\tPreço\tR$ p/ cm²\tDiferença")
+            for(let i=0; i < pizzasCadastradas.length; i++){
+                pizzaAnalisada=pizzasCadastradas[i];
+                
+                //melhor custo beneficio(primeira leitura)
+                if(i==0){
+                    console.log(pizzaAnalisada.tipoPizzas+"\t"+pizzaAnalisada.tamanhoPizzas+"\t"+pizzaAnalisada.precoPizzas+"\t"+pizzaAnalisada.custoArea+"\t"+"MELHOR CB");
+                }
+                else{
+                    //calcula a diferenca de preço entre as opcoes e mostra o percentual
+                    let diferencaCxB = ((pizzaAnalisada.custoArea/pizzasCadastradas[i-1].custoArea)*100).toFixed(2)-100;
+                    diferencaCxB = "+"+diferencaCxB+"%";
+
+                    //imprime o resultado no console
+                    console.log(pizzaAnalisada.tipoPizzas+"\t"+pizzaAnalisada.tamanhoPizzas+"\t"+pizzaAnalisada.precoPizzas+"\t"+pizzaAnalisada.custoArea+"\t"+diferencaCxB);
+                }
+            }
+    }    
 </script>
 </html>
