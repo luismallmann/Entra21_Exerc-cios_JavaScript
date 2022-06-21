@@ -172,7 +172,7 @@
                 else{
                     //calcula a diferenca de preço entre as opcoes e mostra o percentual
                     let diferencaCxB = ((pizzaAnalisada.custoArea/pizzasCadastradas[i-1].custoArea)*100).toFixed(2)-100;
-                    diferencaCxB = "+"+diferencaCxB+"%";
+                    diferencaCxB = "+"+diferencaCxB.toFixed(3)+"%";
 
                     //imprime o resultado no console
                     console.log(pizzaAnalisada.tipoPizzas+"\t"+pizzaAnalisada.tamanhoPizzas+"\t"+pizzaAnalisada.precoPizzas+"\t"+pizzaAnalisada.custoArea+"\t"+diferencaCxB);

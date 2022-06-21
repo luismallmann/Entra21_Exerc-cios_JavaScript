@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Casa de Câmbio - Conversor de Moedas</title>
 
         <style>
             *{
@@ -29,7 +29,7 @@
                 min-width: 550px;
             }
             .secao{
-                padding: 10px;
+                padding: 5px;
                 display: flex;
                 justify-content: space-evenly;
             }
@@ -51,11 +51,9 @@
                 display: inline-block;
                 font-size: 16px;
             }
- 
         </style>    
     </head>
-    <body>
-      
+    <body>''
             <form action="">
                 <div class="linha" style="background-color: darkblue; color: white;">
                     <h1 style="padding: 10px">Conversor de Moedas</h1>
@@ -117,8 +115,8 @@
                         </section>       
                     </div>
                     <br>
-                    <div class="linha" ">
-                        <input type="button" name="nmBtConverter" id="idBtConverter" value="Converter">
+                    <div class="linha" style="text-align: center;">
+                        <input class="button" type="button" name="nmBtConverter" id="idBtConverter" value="Converter">
                     </div>
         </form>
         <div class="linha" id="idMostrarResultados" style="visibility: hidden; padding: 10px;">
@@ -207,7 +205,6 @@
                         resultadoConversao = await (valor*cotacaoMoedaInicial)/cotacaoMoedaFinal;
                     }
                 }        
-
                 document.getElementById("idMostrarResultados").style.visibility="visible";
                 document.getElementById("idMostrarResultados").style.display="block";
                 
@@ -216,7 +213,6 @@
                 document.getElementById("idCotacaoOriginal").value = cotacaoMoedaInicial.toFixed(4) + "["+moedaInicial+"]";
                 document.getElementById("idCotacaoConversao").value = cotacaoMoedaFinal.toFixed(4)+ "["+moedaFinal+"]";
                 document.getElementById("idResultadoConversao").value = resultadoConversao.toFixed(4);
-
             }
         </script>
     </body>

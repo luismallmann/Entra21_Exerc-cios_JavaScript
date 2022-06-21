@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Casa de Câmbio</title>
+        <title>Casa de Câmbio - Cotação de Moedas</title>
         <style>
             *{
                 margin: 0;
@@ -17,7 +17,7 @@
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 color: darkblue;
             }    
-            .menu{
+            form{
                 align-items: center;
                 flex-direction: row;
                 margin: 0 auto;
@@ -53,18 +53,42 @@
         </style>   
     </head>
     <body>
-        <div class="menu">
-            <div class="linha" style="background-color: darkblue; color: white;">
-                <h1 style="padding: 10px">Casa de Câmbio</h1>
-                <br>
+        <div class="linha">
+            <div class="linha">
+
+                <form action="">
+                    <div class="linha" style="background-color: darkblue; color: white;">
+                        <h1 style="padding: 10px">Cotação de Moedas</h1>
+                        <br>
+                    </div>
+                    <div class="linha">
+                        <label for="idMoeda">Moeda</label>
+                        <select name="nmMoeda" id="idMoeda">
+                            <option value="AUD">Dólar Australiano</option>
+                            <option value="CAD">Dólar Canadense</option>
+                            <option value="CHF">Franco Suíço</option>
+                            <option value="EUR">Euro</option>
+                            <option value="GBP">Libra Esterlina</option>
+                            <option value="JPY">Iene</option>
+                            <option value="NOK">Coroa Norueguesa</option>
+                            <option value="SEK">Coroa Sueca</option>
+                            <option value="USD">Dólar dos Estados Unidos</option>
+                        </select>
+                        <br>
+                        <label for="idData">Data</label>
+                        <input type="text" name="nmData" id="idData" placeholder="MM-DD-YYYY">
+                        <div class="linha"  style="text-align: center;">
+                            <input class="button" type="button" name="nmBtCotacao" id="idBtCotacao" value="Cotação">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="linha" style="text-align:center; padding-top:  50px; padding-bottom: 10px;">
-                <button class="button" id="idCotacao" onclick="window.open('cotacao.html')">Cotação de Moedas</button>
-                <button class="button" id="idConversor" onclick="window.open('conversor.html')">Conversor de Moedas</button>
-           
+            <div class="linha" style="text-align: center;">
+                <output id="idValor"> </output>
             </div>
         </div>
-
+           
+       
         <script>
             //Vincula o elemento JavaScript com o elemento HTML
             var btCotacao = document.getElementById("idBtCotacao");
